@@ -1,0 +1,35 @@
+<section class="container">
+    <section class="d-flex justify-content-between mb-5">
+        <section>
+            <h3>Employees</h3>
+        </section>
+        <section>
+            <button type="button" class="btn btn-info" (click)="create()">Create</button>
+        </section>
+    </section>
+    <section *ngIf="employeeData">
+        <section class="container">
+            <section class="row justify-content-around">
+                <ng-container *ngFor="let employee of employeeData">
+                    <section class="col-sm-12 col-md-4 mb-4">
+                        <section class="card shadow">
+                            <div>
+                                <img class="card-img-top" [src]="employee['avatar']" [alt]="employee['first_name']"
+                                    width="100%">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{employee['first_name'] | titleCase:employee['last_name']}}</h5>
+                                <p class="card-text">
+                                    Id: {{employee['id']}}
+                                </p>
+                                <p class="card-text">
+                                    Email: {{employee['email']}}
+                                </p>
+                            </div>
+                        </section>
+                    </section>
+                </ng-container>
+            </section>
+        </section>
+    </section>
+</section>

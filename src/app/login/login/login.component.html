@@ -1,0 +1,26 @@
+<div class="container main">
+    <div class="row main align-items-center justify-content-center">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="border rounded">
+                <div class="p-4">
+                    <h5 class="text-center mb-5">Sign In</h5>
+                    <form [formGroup]="loginForm" (submit)="loginForm.valid && submit()">
+                        <section class="form-group mb-2">
+                            <label class="form-label" for="userId">Email Id</label>
+                            <input type="email" class="form-control" formControlName="userId" id="emailId" placeholder="Email">
+                            <small *ngIf="form.userId.invalid" class="text-danger">Invalid Email</small>
+                        </section>
+                        <section class="form-group mb-5">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password">
+                            <small *ngIf="form.password.invalid" class="text-danger">Password should be min 6 chars max 15 chars</small>
+                        </section>
+                        <section>
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </section>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
