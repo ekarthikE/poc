@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { EmployeeModel } from '../../store/store.model';
 import { HttpService } from '../http.service';
 
 @Component({
@@ -10,20 +13,23 @@ import { HttpService } from '../http.service';
 })
 export class ViewEmployeeComponent implements OnInit {
 
-  employeeData = [];
+  employeeData: EmployeeModel[] = [];
+  employees: Observable<EmployeeModel[]>;
 
   constructor(
     private titleService: Title,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private httpService: HttpService
+    private store: Store<{ employee: EmployeeModel[] }>
   ) {
     this.titleService.setTitle('View Employees');
+    this.employees = store.select('employee');
   }
 
   ngOnInit(): void {
-    this.httpService.getEmployees().subscribe(data => {
-      this.employeeData = data;
+    this.employees.subscribe(x => {
+      const empData = Object.values(x);
+      this.employeeData = empData.slice(0, empData.length - 2);
     });
   }
 
